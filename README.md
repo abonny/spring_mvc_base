@@ -7,4 +7,4 @@ http://pluralsight.com/training/Courses/TableOfContents/maven-fundamentals
 
 http://pluralsight.com/training/Courses/TableOfContents/springmvc-intro
 
-test update
+test other git user change
