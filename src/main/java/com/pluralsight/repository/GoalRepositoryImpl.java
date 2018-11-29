@@ -5,6 +5,7 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 
 import org.springframework.stereotype.Repository;
 
@@ -26,12 +27,9 @@ public class GoalRepositoryImpl implements GoalRepository {
     @SuppressWarnings("unchecked")
     public List<Goal> loadAll() {
         
-        Query query = em.createQuery("select g from Goal g");
+        TypedQuery<Goal> queriedGoals = em.createNamedQuery(Goal.FIND_ALL_GOALS, Goal.class);
         
-        @SuppressWarnings("rawtypes")
-        List queriedGoals = query.getResultList();
-        
-        return queriedGoals;
+        return queriedGoals.getResultList();
     }
     
     /**
@@ -40,10 +38,12 @@ public class GoalRepositoryImpl implements GoalRepository {
      */
     public List<GoalReport> findAllGoalReports() {
         //PROJECTION query
-        Query query = em.createQuery("select new com.pluralsight.model.GoalReport(g.minutes, e.minutes, e.activity)"
-                + " from Goal g, Exercise e where g.id = e.goal.id");
+//        Query query = em.createQuery("select new com.pluralsight.model.GoalReport(g.minutes, e.minutes, e.activity)"
+//                + " from Goal g, Exercise e where g.id = e.goal.id");
         
-        @SuppressWarnings("unchecked")
+        TypedQuery<GoalReport> query = em.createNamedQuery(Goal.FIND_GOAL_REPORTS, GoalReport.class);
+        
+//        @SuppressWarnings("unchecked")
         List<GoalReport> resultList = query.getResultList();
         
         return resultList;
