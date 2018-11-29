@@ -29,7 +29,7 @@ public class Goal {
 	private int minutes;
 	
 	//Without "mappedBy" this would be unidirectional
-	@OneToMany(mappedBy="goal", cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+	@OneToMany(mappedBy="goal", cascade=CascadeType.ALL, fetch=FetchType.LAZY)
 	private List<Exercise> exercises = new ArrayList<Exercise>();
 
 	public Long getId() {
